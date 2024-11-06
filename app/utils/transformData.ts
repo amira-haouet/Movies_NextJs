@@ -22,7 +22,7 @@ export function transformTVShowData(data: TVShow[]): TVShow[] {
 }
 
 
-export function transformMovieData(data: Movie[]): Movie[] {
+export function transformMoviesData(data: Movie[]): Movie[] {
   return data.map((movie: Movie) => ({
     adult: movie.adult,
     backdrop_path: movie.backdrop_path,
