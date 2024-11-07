@@ -4,6 +4,8 @@ import { LoginLayout } from "./login/page";
 import { z } from "zod";
 import bcrypt from "bcryptjs";
 import { User } from "./repository/user";
+import { toast } from "@/hooks/use-toast";
+import { ToastAction } from "@/components/ui/toast";
 
 
 export default function Home() {
@@ -15,11 +17,21 @@ export default function Home() {
         if (isValid) {
             console.log("Login successful");
         } else {
-            console.log("Invalid login credentials");
+          showInvalidLoginToast();
         }
     } else {
-        console.log("Invalid login credentials");
+      showInvalidLoginToast();
     }
+};
+
+const showInvalidLoginToast = () => {
+  toast({
+    variant: "destructive",
+    title: "Oups ! Une erreur est survenue.",
+    description: "Les coordonnées que vous avez fournies sont incorrectes.",
+    action: <ToastAction altText="Réessayer">Réessayer</ToastAction>,
+  });
+  
 };
 
 return (
