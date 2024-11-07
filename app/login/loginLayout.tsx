@@ -16,11 +16,11 @@ import {
 import { FormSchema } from "../entities/formSchemas";
 
 
-interface LoginProps {
+interface LoginLayoutProps {
     onSubmit: (data: z.infer<typeof FormSchema>) => void;
 }
 
-const LoginPage: React.FC<LoginProps> = ({ onSubmit }) => {
+export const LoginLayout: React.FC<LoginLayoutProps> = ({ onSubmit }) => {
     const form = useForm<z.infer<typeof FormSchema>>({
         resolver: zodResolver(FormSchema),
         defaultValues: {
@@ -84,5 +84,3 @@ const LoginPage: React.FC<LoginProps> = ({ onSubmit }) => {
         </div>
     );
 };
-
-export default LoginPage;

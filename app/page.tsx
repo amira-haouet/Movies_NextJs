@@ -1,6 +1,6 @@
 "use client"
 import { FormSchema } from "./entities/formSchemas";
-import { LoginLayout } from "./login/page";
+import { LoginLayout } from "./login/loginLayout";
 import { z } from "zod";
 import bcrypt from "bcryptjs";
 import { User } from "./repository/user";
