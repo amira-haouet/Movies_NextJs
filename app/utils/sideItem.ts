@@ -1,29 +1,38 @@
-import { Calendar, Home, Inbox, Search, Settings } from "lucide-react"
+import { Film, Smile, Tv, User } from "lucide-react"
 
-export const items = [
+export const movieItems = [
     {
-      title: "Home",
+      title: "Now Playing",
       url: "#",
-      icon: Home,
+      icon: Film,
     },
     {
-      title: "Inbox",
+      title: "Popular",
       url: "#",
-      icon: Inbox,
+      icon: User,
     },
     {
-      title: "Calendar",
+      title: "Top Rated",
+      url: "#d",
+      icon: Smile,
+    },
+  ]
+
+
+export const TVShowsItems = [
+    {
+      title: "On The Air",
       url: "#",
-      icon: Calendar,
+      icon: Tv,
     },
     {
-      title: "Search",
+      title: "Popular",
       url: "#",
-      icon: Search,
+      icon: User,
     },
     {
-      title: "Settings",
+      title: "Top Rated",
       url: "#",
-      icon: Settings,
+      icon: Smile,
     },
   ]
