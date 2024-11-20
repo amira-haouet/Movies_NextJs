@@ -16,7 +16,7 @@ import { Grid } from "lucide-react"
   
   export function AppSidebar() {
     return (
-        <Sidebar className="w-64 bg-white border-r border-gray-200">
+        <Sidebar className="w-64 bg-white border-r border-gray-200 mt-16">
         <SidebarContent>
         <SidebarGroup>
           <SidebarMenu>

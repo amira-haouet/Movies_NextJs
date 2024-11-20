@@ -4,6 +4,7 @@ import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar"
 import { AppSidebar } from "./components/sidebar"
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
+import { AppNavbar } from "./components/navbar";
 
 export default function Layout({ children }: { children: React.ReactNode }) {
 const router = useRouter();
@@ -20,12 +21,15 @@ const [isLogged, setIsLogged] = useState(false);
 
   if (!isLogged) return null;
   return (
-    <SidebarProvider>
-      <AppSidebar />
-      <main>
-        <SidebarTrigger />
-        {children}
-      </main>
-    </SidebarProvider>
+    <>
+      <AppNavbar />
+      <SidebarProvider>
+        <AppSidebar />
+        <main className="mt-16">
+          <SidebarTrigger />
+          {children}
+        </main>
+      </SidebarProvider>
+      </>
   )
 }
