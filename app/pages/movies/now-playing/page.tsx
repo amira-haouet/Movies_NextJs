@@ -1,5 +1,5 @@
 import MediaGrid from "@/components/ui/MediaGridMovie";
 
 export default function TopRatedMoviesPage() {
-  return <MediaGrid url="/api/movies/top-rated" title="Top Rated Movies" />;
+    return <MediaGrid url="/api/movies/now-playing" title="Top Rated Movies" />;
 }
