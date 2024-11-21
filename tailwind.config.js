@@ -1,15 +1,17 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  darkMode: 'class', // Assurez-vous que le mode sombre est activé
+  darkMode: 'class', 
   content: [
-    './pages/**/*.{js,ts,jsx,tsx}', // Pour les fichiers dans le dossier "pages"
-    './components/**/*.{js,ts,jsx,tsx}', // Pour les composants
-    './app/**/*.{js,ts,jsx,tsx}' // Si vous utilisez le dossier "app"
+    './pages/**/*.{js,ts,jsx,tsx}', 
+    './components/**/*.{js,ts,jsx,tsx}', 
+    './app/**/*.{js,ts,jsx,tsx}' 
+    
   ],
   theme: {
     extend: {
       colors: {
-        background: 'var(--background)', // Assurez-vous de déclarer vos couleurs personnalisées
+        background: 'var(--background)', 
+        
         foreground: 'var(--foreground)',
         border: 'var(--border)',
       },
