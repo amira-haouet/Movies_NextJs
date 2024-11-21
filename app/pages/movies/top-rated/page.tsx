@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 
 export default function TopRatedTVShows() {
   const [movies, setMovies] = useState<Movie[]>([]);
+  const [isLoading, setIsLoading] = useState(true); // État pour le chargement
 
   useEffect(() => {
     async function fetchData() {
@@ -14,15 +15,21 @@ export default function TopRatedTVShows() {
         setMovies(data); // Remplir l'état avec les données de l'API
       } catch (error) {
         console.error("Erreur lors de la récupération des données :", error);
+      } finally {
+        setIsLoading(false); // Fin du chargement
       }
     }
 
     fetchData();
   }, []);
 
+  if (isLoading) {
+    return <p className="text-center text-gray-500">Chargement des films...</p>;
+  }
+
   return (
     <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6">
-      {movies.length > 0 ? (
+      {movies.length > 0 &&
         movies.map((movie) => (
           <div
             key={movie.id}
@@ -31,7 +38,7 @@ export default function TopRatedTVShows() {
             <img
               src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`}
               alt={movie.title || movie.original_title}
-              className="w-full h-64 object-cover"
+              className="w-full h-auto"
             />
             <div className="p-4">
               <h2 className="text-lg font-bold">
@@ -45,10 +52,7 @@ export default function TopRatedTVShows() {
               </p>
             </div>
           </div>
-        ))
-      ) : (
-        <p className="text-center text-gray-500">Aucun film trouvé.</p>
-      )}
+        ))}
     </div>
   );
 }
