@@ -1,30 +1,9 @@
 "use client";
 
+import { TVShow } from "@/app/entities/TVShow";
 import { useEffect, useState } from "react";
 
-export interface TVShow {
-  adult: boolean;
-  backdrop_path: string;
-  genre_ids: number[];
-  id: number;
-  origin_country: string[];
-  original_language: string;
-  original_name: string;
-  overview: string;
-  popularity: number;
-  poster_path: string;
-  first_air_date: string;
-  name: string;
-  vote_average: number;
-  vote_count: number;
-}
-
-interface TVShowGridProps {
-  url: string;
-  title?: string;
-}
-
-export default function TVShowGrid({ url, title }: TVShowGridProps) {
+export default function TVShowGrid({url,title,}: {url: string; title?: string;}) {
   const [tvShows, setTvShows] = useState<TVShow[]>([]);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -57,7 +36,6 @@ export default function TVShowGrid({ url, title }: TVShowGridProps) {
           <div
             key={show.id}
             className="bg-white rounded-lg shadow-md overflow-hidden"
-            style={{ maxWidth: "200px" }}
           >
             <img
               src={`https://image.tmdb.org/t/p/w500/${show.poster_path}`}
