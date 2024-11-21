@@ -11,6 +11,7 @@ module.exports = {
       colors: {
         background: 'var(--background)', // Assurez-vous de déclarer vos couleurs personnalisées
         foreground: 'var(--foreground)',
+        border: 'var(--border)',
       },
     },
   },
