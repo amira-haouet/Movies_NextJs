@@ -3,17 +3,17 @@ import { Film, Smile, Tv, User } from "lucide-react"
 export const movieItems = [
   {
     title: "Now Playing",
-    url: "api/movies/now-playing", 
+    url: "/pages/movies/now-playing", 
     icon: Film,
   },
   {
     title: "Popular",
-    url: "api/movies/popular", 
+    url: "/pages/movies/popular", 
     icon: User,
   },
   {
     title: "Top Rated",
-    url: "api/movies/top-rated", 
+    url: "/pages/movies/top-rated", 
     icon: Smile,
   },
 ];
@@ -21,17 +21,17 @@ export const movieItems = [
 export const TVShowsItems = [
   {
     title: "On The Air",
-    url: "api/shows/on-the-air", 
+    url: "/shows/on-the-air", 
     icon: Tv,
   },
   {
     title: "Popular",
-    url: "api/shows/popular", 
+    url: "/shows/popular", 
     icon: User,
   },
   {
     title: "Top Rated",
-    url: "api/shows/top-rated", 
+    url: "/shows/top-rated", 
     icon: Smile,
   },
 ];
