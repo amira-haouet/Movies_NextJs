@@ -1,10 +1,12 @@
 "use client";
+import { SidebarTrigger } from "@/components/ui/sidebar";
 import Image from "next/image";
 
 export function AppNavbar() {
     return (
         <nav className="fixed w-full flex items-center justify-between px-4 py-3  bg-gray-50 border-b	z-50">
             <div className="flex items-center">
+            <SidebarTrigger />
             <Image
                     src="/images/logo.png"
                     alt=""
