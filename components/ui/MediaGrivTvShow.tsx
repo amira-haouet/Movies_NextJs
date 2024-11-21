@@ -2,6 +2,7 @@
 
 import { TVShow } from "@/app/entities/TVShow";
 import { useEffect, useState } from "react";
+import Image from 'next/image';
 
 export default function TVShowGrid({url,title,}: {url: string; title?: string;}) {
   const [tvShows, setTvShows] = useState<TVShow[]>([]);
@@ -37,9 +38,11 @@ export default function TVShowGrid({url,title,}: {url: string; title?: string;})
             key={show.id}
             className="bg-white rounded-lg shadow-md overflow-hidden"
           >
-            <img
+            <Image
               src={`https://image.tmdb.org/t/p/w500/${show.poster_path}`}
-              alt={show.name || show.original_name}
+              alt={show.name || show.original_name || 'No title available'}
+              width={500}
+              height={750}
               className="w-full h-auto"
             />
             <div className="p-2">

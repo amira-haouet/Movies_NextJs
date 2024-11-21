@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Image from 'next/image';
 
 interface MediaGridProps {
   url: string;
@@ -42,9 +43,11 @@ export default function MediaGrid({ url, title }: MediaGridProps) {
             className="bg-white rounded-lg shadow-md overflow-hidden"
             style={{ maxWidth: "200px" }}
           >
-            <img
+            <Image
               src={`https://image.tmdb.org/t/p/w500/${item.poster_path}`}
-              alt={item.title || item.original_title || item.name}
+              alt={item.name || item.original_name || 'No title available'}
+              width={500}
+              height={750}
               className="w-full h-auto"
             />
             <div className="p-2">
