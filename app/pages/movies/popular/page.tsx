@@ -8,7 +8,6 @@ export default function PopularMoviesPage() {
   return (
     <div>
       <ThemeToggle />
-
       <GridMovie movies={movies} isLoading={isLoading} />
     </div>
   );
