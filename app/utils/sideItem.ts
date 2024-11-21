@@ -21,17 +21,17 @@ export const movieItems = [
 export const TVShowsItems = [
   {
     title: "On The Air",
-    url: "/shows/on-the-air", 
+    url: "/pages/shows/on-the-air", 
     icon: Tv,
   },
   {
     title: "Popular",
-    url: "/shows/popular", 
+    url: "/pages/shows/popular", 
     icon: User,
   },
   {
     title: "Top Rated",
-    url: "/shows/top-rated", 
+    url: "/pages/shows/top-rated", 
     icon: Smile,
   },
 ];
