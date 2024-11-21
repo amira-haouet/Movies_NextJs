@@ -28,31 +28,31 @@ export default function TopRatedTVShows() {
   }
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6">
-      {movies.length > 0 &&
-        movies.map((movie) => (
-          <div
-            key={movie.id}
-            className="bg-white rounded-lg shadow-md overflow-hidden"
-          >
-            <img
-              src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`}
-              alt={movie.title || movie.original_title}
-              className="w-full h-auto"
-            />
-            <div className="p-4">
-              <h2 className="text-lg font-bold">
-                {movie.title || movie.original_title}
-              </h2>
-              <p className="text-sm text-gray-600 line-clamp-3">
-                {movie.overview}
-              </p>
-              <p className="mt-2 font-bold text-yellow-500">
-                Rating: {movie.vote_average}
-              </p>
-            </div>
+    <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-8">
+      {movies.map((movie) => (
+        <div
+          key={movie.id}
+          className="bg-white rounded-lg shadow-md overflow-hidden"
+          style={{ maxWidth: "200px" }} // Limite la largeur de chaque carte
+        >
+          <img
+            src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`}
+            alt={movie.title || movie.original_title}
+            className="w-full h-auto"
+          />
+          <div className="p-2">
+            <h2 className="text-sm font-bold">
+              {movie.title || movie.original_title}
+            </h2>
+            <p className="text-xs text-gray-600 line-clamp-3">
+              {movie.overview}
+            </p>
+            <p className="mt-2 text-sm font-bold text-yellow-500">
+              Rating: {movie.vote_average}
+            </p>
           </div>
-        ))}
+        </div>
+      ))}
     </div>
   );
 }
