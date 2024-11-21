@@ -5,31 +5,13 @@ import Image from 'next/image';
 import { Movie } from "@/app/entities/Movie";
 
 
-interface MediaGridProps {
-  url: string;
+interface GridMovieProps {
   title?: string;
+  movies: Movie[]; //list films
+  isLoading: boolean;
 }
 
-export default function MediaGrid({ url, title }: MediaGridProps) {
-  const [media, setMedia] = useState<Movie[]>([]);
-  const [isLoading, setIsLoading] = useState(true);
-
-  useEffect(() => {
-    async function fetchData() {
-      try {
-        const res = await fetch(url);
-        if (!res.ok) throw new Error("Erreur lors de la récupération des données");
-        const data: Movie[] = await res.json(); // Use the Movie interface for the API response
-        setMedia(data);
-      } catch (error) {
-        console.error(error);
-      } finally {
-        setIsLoading(false);
-      }
-    }
-
-    fetchData();
-  }, [url]);
+export default function GridMovie({ title, isLoading, movies }: GridMovieProps) {
 
   if (isLoading) {
     return <p className="text-center text-gray-500">Chargement des données...</p>;
@@ -39,7 +21,7 @@ export default function MediaGrid({ url, title }: MediaGridProps) {
     <div className="p-4">
       {title && <h1 className="text-2xl font-bold mb-6">{title}</h1>}
       <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-8">
-        {media.map((movie) => (
+        {movies.map((movie) => (
           <div
             key={movie.id}
             className="bg-white rounded-lg shadow-md overflow-hidden"

@@ -1,11 +1,9 @@
-import TVShowGrid from "@/components/ui/MediaGrivTvShow";
-import ThemeToggle from "@/components/ui/themeToggle";
+'use client';
 
-export default function TopRatedMoviesPage() {
-    return (
-        <div>
-            <ThemeToggle />
-            <TVShowGrid url="/api/shows/top-rated" title="Top Rated Movies" />
-        </div>
-    );
+import GridTvShow from "../components/GridTvShow";
+import { useFetchTvShows } from "../useCase/useFetchTvShows";
+
+export default function TopRatedTvShowsPage() {
+    const { tvShows, isLoading } = useFetchTvShows("/api/shows/top-rated");
+    return <GridTvShow shows={tvShows} isLoading={isLoading} />;
 }

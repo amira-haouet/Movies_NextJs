@@ -1,5 +1,9 @@
-import TVShowGrid from "@/components/ui/MediaGrivTvShow";
+'use client';
 
-export default function TopRatedMoviesPage() {
-    return <TVShowGrid url="/api/shows/on-the-air" title="Top Rated Movies" />;
+import GridTvShow from "../components/GridTvShow";
+import { useFetchTvShows } from "../useCase/useFetchTvShows";
+
+export default function OntheAirTvShowsPage() {
+    const { tvShows, isLoading } = useFetchTvShows("/api/shows/on-the-air");
+    return <GridTvShow shows={tvShows} isLoading={isLoading} />;
 }

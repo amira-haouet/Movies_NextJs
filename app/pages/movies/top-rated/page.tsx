@@ -1,5 +1,8 @@
-import MediaGrid from "@/components/ui/MediaGridMovie";
+'use client'
+import MediaGrid from "@/app/pages/movies/components/GridMovie";
+import { useFetchMovies } from "../useCase/useFetchMovies";
 
 export default function TopRatedMoviesPage() {
-  return <MediaGrid url="/api/movies/top-rated" title="Top Rated Movies" />;
+    const { movies, isLoading} = useFetchMovies("/api/movies/top-rated")
+    return <MediaGrid movies={movies} isLoading = {isLoading} />;
 }
