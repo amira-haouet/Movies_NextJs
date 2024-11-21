@@ -39,9 +39,9 @@ export const LoginLayout: React.FC<LoginLayoutProps> = ({ onSubmit }) => {
                 className="flex-1 object-cover hidden md:block"
             />
 
-            <div className="flex flex-col flex-1 items-center gap-16 bg-white px-6 pt-20 md:pt-0 md:gap-36">
+            <div className="flex flex-col flex-1 items-center gap-16 bg-white px-6 pt-20  pmd:pt-0 md:gap-36">
                 <Image
-                    src="/images/logo.png"
+                    src="/images/logo.png" 
                     alt="Clapperboard and popcorn"
                     width={200}
                     height={200}

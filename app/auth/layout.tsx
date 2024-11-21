@@ -1,6 +1,6 @@
 "use client";
 
-import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar"
+import { SidebarProvider } from "@/components/ui/sidebar"
 import { AppSidebar } from "./components/sidebar"
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -21,15 +21,12 @@ const [isLogged, setIsLogged] = useState(false);
 
   if (!isLogged) return null;
   return (
-    <>
-      <AppNavbar />
       <SidebarProvider>
+      <AppNavbar />
+      <div className="flex">
         <AppSidebar />
-        <main className="mt-16">
-          <SidebarTrigger />
-          {children}
-        </main>
-      </SidebarProvider>
-      </>
+        <main className="mt-16 flex-1">{children}</main>
+      </div>
+    </SidebarProvider>
   )
 }
