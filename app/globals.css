@@ -3,7 +3,13 @@
 @tailwind utilities;
 
 body {
+  @apply bg-white text-black; /*par défaut claire */
   font-family: Arial, Helvetica, sans-serif;
+}
+
+/* sombre */
+body.dark {
+  @apply bg-gray-900 text-white;
 }
 
 @layer utilities {
@@ -92,3 +98,4 @@ body {
     @apply bg-background text-foreground;
   }
 }
+
