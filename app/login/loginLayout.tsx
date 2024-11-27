@@ -14,13 +14,15 @@ import {
     FormMessage,
 } from "@/components/ui/form";
 import { FormSchema } from "../entities/formSchemas";
+import { signIn } from "next-auth/react";
+import { toast } from "@/hooks/use-toast";
+import { ToastAction } from "@/components/ui/toast";
+import { useRouter } from "next/navigation";
 
 
-interface LoginLayoutProps {
-    onSubmit: (data: z.infer<typeof FormSchema>) => void;
-}
+export const LoginLayout: React.FC = () => {
+    const router = useRouter();
 
-export const LoginLayout: React.FC<LoginLayoutProps> = ({ onSubmit }) => {
     const form = useForm<z.infer<typeof FormSchema>>({
         resolver: zodResolver(FormSchema),
         defaultValues: {
@@ -28,6 +30,28 @@ export const LoginLayout: React.FC<LoginLayoutProps> = ({ onSubmit }) => {
             password: "",
         },
     });
+
+    const handleSubmit = async (data: z.infer<typeof FormSchema>) => {
+        const result = await signIn("credentials", {
+            redirect: false,
+            email: data.email,
+            password: data.password,
+        });
+
+        if (result?.error) {
+            toast({
+                variant: "destructive",
+                title: "Oups ! Une erreur est survenue.",
+                description: "Les coordonnées que vous avez fournies sont incorrectes.",
+                action: <ToastAction altText="Réessayer">Réessayer</ToastAction>,
+              });
+        }
+        else
+        {       
+            router.push("/dashboard");
+         }   
+        };
+
 
     return (
         <div className="flex flex-col md:flex-row min-h-screen">
@@ -49,7 +73,7 @@ export const LoginLayout: React.FC<LoginLayoutProps> = ({ onSubmit }) => {
                 />
 
                 <Form {...form}>
-                    <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col gap-6 w-full max-w-sm">
+                    <form onSubmit={form.handleSubmit(handleSubmit)}  className="flex flex-col gap-6 w-full max-w-sm">
                         <FormField
                             control={form.control}
                             name="email"
