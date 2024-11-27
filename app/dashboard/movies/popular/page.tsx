@@ -1,5 +1,5 @@
 'use client'
-import GridMovie from "@/app/pages/movies/components/GridMovie";
+import GridMovie from "../components/GridMovie";
 import { useFetchMovies } from "../useCase/useFetchMovies";
 import ThemeToggle from "@/components/ui/themeToggle";
 
