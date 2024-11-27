@@ -28,26 +28,34 @@ export default function MovieDetails({ params }: { params: { id: string } }) {
   if (isLoading) return <p>Chargement...</p>;
   if (!movieDetails) return <p>Aucun détail trouvé.</p>;
 
-  return (
-    <div className="min-h-screen bg-black text-white">
-      {/* Backdrop */}
-      <div
-        className="relative h-96 bg-cover bg-center"
-        style={{
-          backgroundImage: `url(https://image.tmdb.org/t/p/original${movieDetails.backdrop_path})`,
-        }}
-      >
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black"></div>
-        <div className="absolute bottom-4 left-4 text-white">
-          <h1 className="text-5xl font-bold">{movieDetails.title}</h1>
-          <p className="text-lg italic">{movieDetails.tagline}</p>
-        </div>
-      </div>
+  // Génération des étoiles
+  const generateStars = (rating: number) => {
+    const stars = Math.round(rating / 2); // Convertir sur une échelle de 5
+    return Array(5)
+      .fill(0)
+      .map((_, index) => (
+        <span key={index} className={index < stars ? 'text-yellow-500' : 'text-gray-400'}>
+          ★
+        </span>
+      ));
+  };
 
-      {/* Content */}
-      <div className="p-6 flex flex-col lg:flex-row lg:space-x-8">
+  return (
+    <div
+      className="relative min-h-screen text-white"
+      style={{
+        backgroundImage: `url(https://image.tmdb.org/t/p/original${movieDetails.backdrop_path})`,
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+      }}
+    >
+      {/* Overlay avec flou et transparence */}
+      <div className="absolute inset-0 bg-black bg-opacity-60 backdrop-blur-sm"></div>
+
+      {/* Contenu principal */}
+      <div className="relative p-6 flex flex-col lg:flex-row lg:space-x-8">
         {/* Poster */}
-        <div>
+        <div className="z-10">
           <Image
             src={`https://image.tmdb.org/t/p/w500${movieDetails.poster_path}`}
             alt={movieDetails.title || 'Affiche indisponible'}
@@ -58,9 +66,16 @@ export default function MovieDetails({ params }: { params: { id: string } }) {
         </div>
 
         {/* Details */}
-        <div className="flex-1 mt-4 lg:mt-0">
-          <h2 className="text-3xl font-semibold">Synopsis</h2>
-          <p className="mt-2">{movieDetails.overview}</p>
+        <div className="flex-1 mt-4 lg:mt-0 z-10">
+          <h1 className="text-5xl font-bold">{movieDetails.title}</h1>
+          <p className="text-lg italic">{movieDetails.tagline}</p>
+          <div className="flex items-center mt-4">
+            <strong>Note moyenne :</strong>
+            <span className="ml-2">{generateStars(movieDetails.vote_average)}</span>
+          </div>
+          <p className="mt-4">
+            <strong>Synopsis :</strong> {movieDetails.overview}
+          </p>
           <p className="mt-4">
             <strong>Date de sortie :</strong> {movieDetails.release_date}
           </p>
@@ -70,28 +85,29 @@ export default function MovieDetails({ params }: { params: { id: string } }) {
           <p>
             <strong>Statut :</strong> {movieDetails.status}
           </p>
-          <p>
-            <strong>Note moyenne :</strong> {movieDetails.vote_average.toFixed(1)} / 10
-          </p>
           <p className="mt-4">
             <strong>Genres :</strong> {movieDetails.genres.map((genre) => genre.name).join(', ')}
           </p>
 
+          {/* Sociétés de production */}
           <div className="mt-6">
             <h3 className="text-2xl font-semibold">Sociétés de Production</h3>
             <div className="flex flex-wrap mt-2">
               {movieDetails.production_companies.map((company) => (
-                <div key={company.id} className="mr-4 mb-4">
-                  {company.logo_path && (
+                <div key={company.id} className="mr-4 mb-4 text-center">
+                  {company.logo_path ? (
                     <Image
                       src={`https://image.tmdb.org/t/p/w200${company.logo_path}`}
                       alt={company.name}
-                      width={50}
-                      height={50}
+                      width={80}
+                      height={80}
                       className="rounded"
                     />
+                  ) : (
+                    <div className="w-20 h-20 bg-gray-700 flex items-center justify-center rounded">
+                      <span className="text-sm text-gray-400">{company.name}</span>
+                    </div>
                   )}
-                  <p className="text-sm">{company.name}</p>
                 </div>
               ))}
             </div>
