@@ -24,11 +24,11 @@ export function AppNavbar() {
                 <input
                     type="text"
                     placeholder="Rechercher..."
-                    className="w-32 rounded-lg border border-gray-300 px-4 py-2 text-gray-700 focus:outline-none focus:ring-2 focus:ring-black sm:w-72"
+                    className="w-32 rounded-lg border border-gray-300 px-4 py-2 text-gray-700 focus:outline-none focus:ring-2 focus:ring-black md:w-72"
                 />
             </div>
 
-            <p className="mx-3"> Hello {session?.user?.name}!</p>
+            <p className="mx-3 hidden sm:block"> Hello {session?.user?.name}!</p>
             <Button variant="destructive" onClick={() => signOut()}>Sign out</Button>
             </div>
         </nav>
