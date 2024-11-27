@@ -1,7 +1,3 @@
-<<<<<<< HEAD
-import { NextApiRequest, NextApiResponse } from 'next';
-=======
->>>>>>> f538e0e6ff15c1aa2e4fe2dcbe04507f845ca95d
 import { NextResponse } from 'next/server';
 
 export async function GET(
