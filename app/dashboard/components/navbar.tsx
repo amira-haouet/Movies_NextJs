@@ -17,14 +17,22 @@ export function AppNavbar() {
                     alt=""
                     width={100}
                     height={100}
+                    className="hidden sm:block"
                 />
+             <Image
+                    src="/images/cinema.svg"
+                    alt=""
+                    width={20}
+                    height={20}
+                    className="block sm:hidden"
+                />   
             </div>
             <div className="flex items-center">
             <div className="flex items-center">
                 <input
                     type="text"
                     placeholder="Rechercher..."
-                    className="w-32 rounded-lg border border-gray-300 px-4 py-2 text-gray-700 focus:outline-none focus:ring-2 focus:ring-black md:w-72"
+                    className="w-32 rounded-lg border border-gray-300 px-4 py-2 text-gray-700 focus:outline-none focus:ring-2 focus:ring-black md:w-72 mr-2"
                 />
             </div>
 
