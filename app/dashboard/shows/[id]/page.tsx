@@ -2,11 +2,12 @@
 
 import { useEffect, useState } from 'react';
 import Image from 'next/image';
+import { TVShow } from '@/app/entities/TVShow';
 
 export default function ShowDetails({ params }: { params: { id: string } }) {
   const { id } = params;
 
-  const [showDetails, setShowDetails] = useState<ShowDetailsType | null>(null);
+  const [showDetails, setShowDetails] = useState<TVShow | null>(null);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {

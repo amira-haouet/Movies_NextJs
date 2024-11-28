@@ -6,7 +6,7 @@ import { Movie } from "@/app/entities/Movie";
 
 interface GridMovieProps {
   title?: string;
-  movies: Movie[]; // List of movies
+  movies: Movie[]; 
   isLoading: boolean;
 }
 
