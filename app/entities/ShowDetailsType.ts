@@ -13,11 +13,11 @@ interface ShowDetailsType {
   number_of_seasons: number;
   number_of_episodes: number;
   networks: { id: number; name: string; logo_path: string }[];
-  tagline: string; // Exemple : "Souviens-toi de mon nom."
+  tagline: string;
   last_air_date: string;
   production_companies: { id: number; name: string; logo_path: string | null }[];
-  homepage: string; // Lien vers la page officielle
-  popularity: number; // Mesure de popularité
+  homepage: string;
+  popularity: number;
   seasons: {
     id: number;
     name: string;
