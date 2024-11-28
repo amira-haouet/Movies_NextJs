@@ -20,7 +20,7 @@ export default function GridMovie({ title, isLoading, movies }: GridMovieProps) 
       {title && <h1 className="text-2xl font-bold mb-6">{title}</h1>}
       <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-8">
         {movies.map((movie) => (
-          <Link href={`/movies/${movie.id}`} key={movie.id}>
+          <Link href={`${movie.id}`} key={movie.id}>
             <div
               className="bg-white rounded-lg shadow-md overflow-hidden cursor-pointer"
               style={{ maxWidth: "200px" }}

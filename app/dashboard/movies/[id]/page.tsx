@@ -25,9 +25,6 @@ export default function MovieDetails({ params }: { params: { id: string } }) {
     fetchDetails();
   }, [id]);
 
-  if (isLoading) return <p>Chargement...</p>;
-  if (!movieDetails) return <p>Aucun détail trouvé.</p>;
-
   // Génération des étoiles
   const generateStars = (rating: number) => {
     const stars = Math.round(rating / 2); // Convertir sur une échelle de 5
@@ -40,6 +37,9 @@ export default function MovieDetails({ params }: { params: { id: string } }) {
       ));
   };
 
+  if (isLoading) return <p>Chargement...</p>;
+  if (!movieDetails) return <p>Aucun détail trouvé.</p>;
+
   return (
     <div
       className="relative min-h-screen text-white"
@@ -49,12 +49,9 @@ export default function MovieDetails({ params }: { params: { id: string } }) {
         backgroundPosition: 'center',
       }}
     >
-      {/* Overlay avec flou et transparence */}
       <div className="absolute inset-0 bg-black bg-opacity-60 backdrop-blur-sm"></div>
 
-      {/* Contenu principal */}
       <div className="relative p-6 flex flex-col lg:flex-row lg:space-x-8">
-        {/* Poster */}
         <div className="z-10">
           <Image
             src={`https://image.tmdb.org/t/p/w500${movieDetails.poster_path}`}
@@ -65,7 +62,6 @@ export default function MovieDetails({ params }: { params: { id: string } }) {
           />
         </div>
 
-        {/* Details */}
         <div className="flex-1 mt-4 lg:mt-0 z-10">
           <h1 className="text-5xl font-bold">{movieDetails.title}</h1>
           <p className="text-lg italic">{movieDetails.tagline}</p>
@@ -89,7 +85,6 @@ export default function MovieDetails({ params }: { params: { id: string } }) {
             <strong>Genres :</strong> {movieDetails.genres.map((genre) => genre.name).join(', ')}
           </p>
 
-          {/* Sociétés de production */}
           <div className="mt-6">
             <h3 className="text-2xl font-semibold">Sociétés de Production</h3>
             <div className="flex flex-wrap mt-2">
@@ -108,6 +103,31 @@ export default function MovieDetails({ params }: { params: { id: string } }) {
                       <span className="text-sm text-gray-400">{company.name}</span>
                     </div>
                   )}
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div className="mt-6">
+            <h3 className="text-2xl font-semibold">Crédits</h3>
+            <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4 mt-4">
+              {movieDetails.credits.cast.map((cast) => (
+                <div key={cast.id} className="text-center">
+                  {cast.profile_path ? (
+                    <Image
+                      src={`https://image.tmdb.org/t/p/w200${cast.profile_path}`}
+                      alt={cast.name}
+                      width={80}
+                      height={120}
+                      className="rounded-lg shadow"
+                    />
+                  ) : (
+                    <div className="w-20 h-30 bg-gray-700 flex items-center justify-center rounded-lg">
+                      <span className="text-sm text-gray-400">Photo indisponible</span>
+                    </div>
+                  )}
+                  <p className="text-sm mt-2">{cast.name}</p>
+                  <p className="text-xs text-gray-400">{cast.character}</p>
                 </div>
               ))}
             </div>

@@ -19,7 +19,7 @@ export default function GridTVShow({ title, isLoading, shows }: GridTVShowProps)
       {title && <h1 className="text-2xl font-bold mb-6">{title}</h1>}
       <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-8">
         {shows.map((show) => (
-          <Link href={`/shows/${show.id}`} key={show.id}>
+          <Link href={`${show.id}`} key={show.id}>
             <div className="bg-white rounded-lg shadow-md overflow-hidden cursor-pointer">
               <Image
                 src={`https://image.tmdb.org/t/p/w500${show.poster_path}`}

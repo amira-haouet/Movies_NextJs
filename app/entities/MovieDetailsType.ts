@@ -11,8 +11,8 @@ interface MovieDetailsType {
   vote_average: number;
   vote_count: number;
   production_companies: { id: number; name: string; logo_path: string }[];
-  belongs_to_collection?: { name: string; poster_path: string };
-  budget: number;
-  revenue: number;
-  spoken_languages: { name: string }[];
+  credits: {
+    cast: { id: number; name: string; character: string; profile_path: string | null }[];
+    crew: { id: number; name: string; job: string; profile_path: string | null }[];
+  };
 }
