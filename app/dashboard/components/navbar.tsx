@@ -4,13 +4,14 @@ import { useSession } from "next-auth/react";
 import Image from "next/image";
 import { signOut } from "next-auth/react";
 import { Button } from "@/components/ui/button";
+import ThemeToggle from "@/components/ui/themeToggle";
 
 export function AppNavbar() {
     const { data: session } = useSession()
 
     return (
-        <nav className="fixed w-full flex items-center justify-between px-4 py-3  bg-gray-50 border-b	z-50">
-            <div className="flex items-center">
+<nav className="fixed w-full flex items-center justify-between px-4 py-3 bg-gray-50 dark:bg-[#31363F] border-b z-50 text-black dark:text-white">
+    <div className="flex items-center">
             <SidebarTrigger />
             <Image
                     src="/images/logo.png"
@@ -37,6 +38,7 @@ export function AppNavbar() {
             </div>
 
             <p className="mx-3 hidden sm:block"> Hello {session?.user?.name}!</p>
+            <ThemeToggle /> 
             <Button variant="destructive" onClick={() => signOut()}>Sign out</Button>
             </div>
         </nav>

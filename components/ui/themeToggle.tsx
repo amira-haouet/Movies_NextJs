@@ -1,66 +1,22 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import { Moon, Sun, Monitor } from "lucide-react";
+import { useTheme } from "next-themes";
+import { useEffect, useState } from "react";
 
-export default function ThemeToggle(): JSX.Element {
-  const [theme, setTheme] = useState<"light" | "dark" | "system">("system");
+export default function ThemeSwitcher() {
+  const [mounted, setMounted] = useState(false);
+  const { theme, setTheme } = useTheme();
 
-  useEffect(() => {
-    const savedTheme = localStorage.getItem("theme") as "light" | "dark" | "system";
-    if (savedTheme) {
-      setTheme(savedTheme);
-      applyTheme(savedTheme);
-    } else {
-      // Par défaut : mode system
-      const systemPrefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-      const initialTheme = systemPrefersDark ? "dark" : "light";
-      applyTheme(initialTheme);
-      setTheme("system");
-    }
-  }, []);
+  useEffect(() => setMounted(true), []);
 
-  const applyTheme = (mode: "light" | "dark" | "system") => {
-    if (mode === "dark") {
-      document.body.classList.add("dark");
-      document.body.classList.remove("light");
-    } else if (mode === "light") {
-      document.body.classList.add("light");
-      document.body.classList.remove("dark");
-    } else {
-      const systemPrefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-      if (systemPrefersDark) {
-        document.body.classList.add("dark");
-        document.body.classList.remove("light");
-      } else {
-        document.body.classList.add("light");
-        document.body.classList.remove("dark");
-      }
-    }
-  };
-
-  const toggleTheme = (): void => {
-    let nextTheme: "light" | "dark" | "system";
-    if (theme === "light") {
-      nextTheme = "dark";
-    } else if (theme === "dark") {
-      nextTheme = "system";
-    } else {
-      nextTheme = "light";
-    }
-    setTheme(nextTheme);
-    localStorage.setItem("theme", nextTheme);
-    applyTheme(nextTheme);
-  };
+  if (!mounted) return null;
 
   return (
     <button
-      onClick={toggleTheme}
-      className="fixed top-4 right-4 bg-gray-200 dark:bg-gray-800 text-black dark:text-white px-4 py-2 rounded shadow-md flex items-center justify-center"
+      onClick={() => setTheme(theme === "light" ? "dark" : "light")}
+      className="p-2 rounded bg-gray-200 dark:bg-gray-800 text-gray-900 dark:text-gray-100"
     >
-      {theme === "light" && <Sun className="w-5 h-5 text-yellow-500" />}
-      {theme === "dark" && <Moon className="w-5 h-5 text-blue-500" />}
-      {theme === "system" && <Monitor className="w-5 h-5 text-gray-500" />}
+      {theme === "light" ? "🌙" : "☀️"}
     </button>
   );
 }
