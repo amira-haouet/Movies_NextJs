@@ -1,32 +1,31 @@
 'use client'
+
 import { Movie } from "@/app/entities/Movie";
-import { useEffect, useState } from "react";
+import { MoviesRepositoryInternal } from "@/repositories/MoviesRepositoryInternal";
+import { useQuery } from "@tanstack/react-query";
 
-export const useFetchMovies = (url: string) => {
-    const [movie, setMovie] = useState<Movie[]>([]);
-    const [isLoading, setIsLoading] = useState(true);
+export const useFetchMovies = (category: "now-playing" | "popular" | "top-rated") => {
+    const repository = new MoviesRepositoryInternal();
 
-    useEffect(() => {
-        async function fetchData() {
-            try {
-                const res = await fetch(url);
-                if (!res.ok) throw new Error("Erreur lors de la récupération des données");
-                const data: Movie[] = await res.json();
-                setMovie(data);
-            } catch (error) {
-                console.error(error);
-            } finally {
-                setIsLoading(false);
-            }
+    const fetchMovies = async (): Promise<Movie[]> => {
+        switch (category) {
+            case "now-playing":
+                return await repository.getNowPlayingMovies();
+            case "popular":
+                return await repository.getPopularMovies();
+            case "top-rated":
+                return await repository.getTopRatedMovies();
+            default:
+                throw new Error("Invalid category");
         }
+    };
 
-        fetchData();
-    }, [url]);
+    const { data: movies, isLoading, isError } = useQuery<Movie[]>(
+        {
+            queryKey: ["movies", category],
+            queryFn: fetchMovies,
+        }
+    );
 
-    return {
-        movies: movie, isLoading
-    }
-}
-
-
-
+    return { movies, isLoading, isError };
+};

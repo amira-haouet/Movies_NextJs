@@ -45,17 +45,18 @@ export default function MovieDetails({ params }: { params: { id: string } }) {
     <div
       className="relative min-h-screen text-white"
       style={{
-        backgroundImage: `url(https://image.tmdb.org/t/p/original${movieDetails.backdrop_path})`,
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
+        //backgroundImage: `url(https://image.tmdb.org/t/p/original${movieDetails.backdrop_path})`,
+        //backgroundSize: ',
+        backgroundPosition: 'top',
       }}
     >
-      {/* Overlay avec flou et transparence */}
-      <div className="absolute inset-0 bg-black bg-opacity-60 backdrop-blur-sm"></div>
+      <div className="absolute inset-0 bg-black bg-opacity-60 backdrop-blur-xl dark:bg-opacity-80"></div>
 
-      {/* Contenu principal */}
-      <div className="relative p-6 flex flex-col lg:flex-row lg:space-x-8">
-        {/* Poster */}
+      <div className="relative p-6 flex flex-col lg:flex-row lg:space-x-8"  style={{
+        backgroundImage: `url(https://image.tmdb.org/t/p/original${movieDetails.backdrop_path})`,
+        backgroundSize: "cover",
+        backgroundPosition: 'top',
+      }}>
         <div className="z-10">
           <Image
             src={`https://image.tmdb.org/t/p/w500${movieDetails.poster_path}`}
@@ -87,14 +88,14 @@ export default function MovieDetails({ params }: { params: { id: string } }) {
             <strong>Statut :</strong> {movieDetails.status}
           </p>
           <p className="mt-4">
-            <strong>Genres :</strong> {movieDetails.genres.map((genre) => genre.name).join(', ')}
+            <strong>Genres :</strong> {movieDetails.genres?.map((genre) => genre.name).join(', ')}
           </p>
 
           {/* Sociétés de production */}
           <div className="mt-6">
             <h3 className="text-2xl font-semibold">Sociétés de Production</h3>
             <div className="flex flex-wrap mt-2">
-              {movieDetails.production_companies.map((company) => (
+              {movieDetails?.production_companies?.map((company) => (
                 <div key={company.id} className="mr-4 mb-4 text-center">
                   {company.logo_path ? (
                     <Image

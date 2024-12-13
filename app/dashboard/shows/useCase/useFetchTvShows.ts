@@ -1,32 +1,32 @@
 'use client'
+
 import { TVShow } from "@/app/entities/TVShow";
-import { useEffect, useState } from "react";
+import { TVShowRepositoryInternal } from "@/repositories/TVShowRepositoryInternal";
+import { useQuery } from "@tanstack/react-query";
 
-export const useFetchTvShows = (url: string) => {
-    const [tvShow, setTVShow] = useState<TVShow[]>([]);
-    const [isLoading, setIsLoading] = useState(true);
+export const useFetchTvShows = (category: "on-the-air" | "popular" | "top-rated") => {
+    const repository = new TVShowRepositoryInternal();
 
-    useEffect(() => {
-        async function fetchData() {
-            try {
-                const res = await fetch(url);
-                if (!res.ok) throw new Error("Erreur lors de la récupération des données");
-                const data: TVShow[] = await res.json();
-                setTVShow(data);
-            } catch (error) {
-                console.error(error);
-            } finally {
-                setIsLoading(false);
-            }
+    const fetchTVShow = async (): Promise<TVShow[]> => {
+        switch (category) {
+            case "on-the-air":
+                return await repository.getOnTheAirTVShow();
+            case "popular":
+                return await repository.getPopularTVShow();
+            case "top-rated":
+                return await repository.getTopRatedTVShow();
+            default:
+                throw new Error("Invalid category");
         }
+    };
 
-        fetchData();
-    }, [url]);
+    const { data: TVShows, isLoading, isError } = useQuery<TVShow[]>(
+        {
+            queryKey: ["TVShows", category],
+            queryFn: fetchTVShow,
+        }
+    );
 
-    return {
-        tvShows: tvShow, isLoading
-    }
+    return { TVShows, isLoading, isError };
 }
-
-
 
