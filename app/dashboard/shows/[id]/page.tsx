@@ -31,7 +31,7 @@ export default function ShowDetailsPage({ params }: { params: { id: string } }) 
       >
         <div className="absolute inset-0 bg-gradient-to-b from-black/60 to-black/90 flex items-center px-6 text-white">
           <div>
-            <h1 className="text-4xl font-bold">{TVShow.name}</h1>
+            <h1 data-testid="show-title" className="text-4xl font-bold">{TVShow.name}</h1>
             {TVShow.tagline && <p className="mt-2 italic text-lg">{TVShow.tagline}</p>}
             <p className="mt-3 text-sm">
               <strong>Date de première diffusion :</strong> {TVShow.first_air_date}
@@ -44,7 +44,7 @@ export default function ShowDetailsPage({ params }: { params: { id: string } }) 
               <div className="ml-2 flex items-center">
                 {generateStars(TVShow.vote_average)}
               </div>
-              <span className="ml-2 text-yellow-400 font-semibold">
+              <span  data-testid="show-rating" className="ml-2 text-yellow-400 font-semibold">
                 {TVShow.vote_average.toFixed(1)} / 10
               </span>
               <span className="ml-2 text-gray-300 dark:text-gray-500">({TVShow.vote_count} votes)</span>
@@ -56,6 +56,7 @@ export default function ShowDetailsPage({ params }: { params: { id: string } }) 
       <div className="mt-6 flex flex-col lg:flex-row lg:space-x-8">
         <div className="flex-shrink-0 hidden lg:block lg:w-1/4">
           <Image
+            data-testid="show-poster"
             src={`https://image.tmdb.org/t/p/w500${TVShow.poster_path}`}
             alt={TVShow.name || 'Affiche indisponible'}
             width={300}

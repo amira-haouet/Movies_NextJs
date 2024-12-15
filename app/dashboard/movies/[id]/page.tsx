@@ -33,7 +33,7 @@ export default function MovieDetailsPage({ params }: { params: { id: string } })
       >
         <div className="absolute inset-0 bg-gradient-to-b from-black/60 to-black/90 flex items-center px-6 text-white">
           <div>
-            <h1 className="text-4xl font-bold">{movie.title}</h1>
+            <h1 data-testid="movie-title" className="text-4xl font-bold">{movie.title}</h1>
             {movie.tagline && <p className="mt-2 italic text-lg">{movie.tagline}</p>}
             <p className="mt-3 text-sm">
               <strong>Date de sortie :</strong> {movie.release_date}
@@ -46,7 +46,7 @@ export default function MovieDetailsPage({ params }: { params: { id: string } })
               <div className="ml-2 flex items-center">
                 {generateStars(movie.vote_average)}
               </div>
-              <span className="ml-2 text-yellow-400 font-semibold">
+              <span data-testid="movie-rating" className="ml-2 text-yellow-400 font-semibold">
                 {movie.vote_average.toFixed(1)} / 10
               </span>
               <span className="ml-2 text-gray-300 dark:text-gray-500">({movie.vote_count} votes)</span>
@@ -60,6 +60,7 @@ export default function MovieDetailsPage({ params }: { params: { id: string } })
         {/* Poster */}
         <div className="flex-shrink-0 hidden lg:block lg:w-1/4">
           <Image
+            data-testid="movie-poster"
             src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
             alt={movie.title || 'Affiche indisponible'}
             width={300}

@@ -45,6 +45,7 @@ export default function GridMovie({ title, isLoading, movies, isHorizontal }: Gr
         {movies.map((movie) => (
           <Link href={`/dashboard/movies/${movie.id}`} key={movie.id}>
             <div
+              data-testid="movie-card"
               className="bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden cursor-pointer transition-transform transform hover:scale-105 flex flex-col h-full"
               style={{ minWidth: isHorizontal ? "200px" : "auto" }} 
             >

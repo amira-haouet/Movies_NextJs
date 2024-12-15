@@ -44,11 +44,12 @@ export const LoginLayout: React.FC = () => {
                 title: "Oups ! Une erreur est survenue.",
                 description: "Les coordonnées que vous avez fournies sont incorrectes.",
                 action: <ToastAction altText="Réessayer">Réessayer</ToastAction>,
+                role :"alert"
               });
         }
         else
         {       
-            router.push("/dashboard");
+            router.push("/dashboard/discover");
          }   
         };
 
