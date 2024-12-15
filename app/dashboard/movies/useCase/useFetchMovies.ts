@@ -2,7 +2,6 @@
 
 import { Movie } from "@/app/entities/Movie";
 import { useApplicationRepositoryContext } from "@/repositories/ApplicationRepositoryContext";
-import { MoviesRepositoryInternal } from "@/repositories/MoviesRepositoryInternal";
 import { useQuery } from "@tanstack/react-query";
 
 export const useFetchMovies = (category: "now-playing" | "popular" | "top-rated") => {

@@ -7,11 +7,8 @@ import { Button } from "@/components/ui/button";
 import ThemeToggle from "@/components/ui/themeToggle";
 import { setSearchTerm } from "@/app/store/searchObservable";
 
-interface AppNavbarProps {
-  onSearch: (term: string) => void;
-}
 
-export function AppNavbar({ onSearch }: AppNavbarProps) {
+export function AppNavbar() {
   const { data: session } = useSession();
 
   return (

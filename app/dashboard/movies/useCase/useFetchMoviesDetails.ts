@@ -2,7 +2,6 @@
 
 import { Movie } from "@/app/entities/Movie";
 import { useApplicationRepositoryContext } from "@/repositories/ApplicationRepositoryContext";
-import { MoviesRepositoryInternal } from "@/repositories/MoviesRepositoryInternal";
 import { useQuery } from "@tanstack/react-query";
 export const useFetchMovieDetails = (id: string) => {
     const { moviesRepository } = useApplicationRepositoryContext();

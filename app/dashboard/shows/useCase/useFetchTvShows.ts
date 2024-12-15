@@ -2,7 +2,6 @@
 
 import { TVShow } from "@/app/entities/TVShow";
 import { useApplicationRepositoryContext } from "@/repositories/ApplicationRepositoryContext";
-import { TVShowRepositoryInternal } from "@/repositories/TVShowRepositoryInternal";
 import { useQuery } from "@tanstack/react-query";
 
 export const useFetchTvShows = (category: "on-the-air" | "popular" | "top-rated") => {
