@@ -3,10 +3,9 @@
 import { SidebarProvider } from "@/components/ui/sidebar";
 import { AppSidebar } from "./components/sidebar";
 import { AppNavbar } from "./components/navbar";
-import React, { useState } from "react";
+import React from "react";
 
 export default function Layout({ children }: { children: React.ReactNode }) {
-  const [searchTerm] = useState<string>("");
 
   return (
     <SidebarProvider>
