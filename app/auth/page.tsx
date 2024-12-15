@@ -4,6 +4,6 @@ export default function Home() {
    
   return (
     <div>
-      <p>En cours de développement...</p>
+      <p>En cours de chargement...</p>
     </div>
   );}

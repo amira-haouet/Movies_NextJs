@@ -16,12 +16,12 @@ export async function middleware(req: NextRequest) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
 
-    if (pathname === "/" || pathname.startsWith("/dashboard")) {
+    if (pathname === "/" || pathname.startsWith("/dashboard/discover") || pathname.startsWith("/dashboard")) {
       return NextResponse.redirect(new URL("/login", req.url));
     }
   } else {
     if (pathname === "/login" || pathname === "/") {
-      return NextResponse.redirect(new URL("/dashboard", req.url));
+      return NextResponse.redirect(new URL("/dashboard/discover", req.url));
     }
   }
 
