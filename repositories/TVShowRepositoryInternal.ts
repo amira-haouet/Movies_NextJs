@@ -26,4 +26,11 @@ export class TVShowRepositoryInternal implements TVShowRepository {
   async getTopRatedTVShow(): Promise<TVShow[]> {
     return this.fetchFromApi(`/api/shows/top-rated`);
   }
+  async getTVShowDetails(id: string): Promise<TVShow> {
+    const response = await fetch(`/api/shows/${id}`);
+    if (!response.ok) {
+      throw new Error(`Erreur lors de la récupération du serie avec l'ID ${id}`);
+    }
+    return await response.json();
+  }
 }

@@ -7,6 +7,7 @@ import { SessionProvider } from "next-auth/react";
 import { ThemeProvider } from "next-themes";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { useState } from "react";
+import { ApplicationRepositoryProvider } from "@/repositories/ApplicationRepositoryContext";
 
 
 const geistSans = localFont({
@@ -34,7 +35,11 @@ export default function RootLayout({
       >
     <QueryClientProvider client={queryClient}>
       <ThemeProvider attribute="class" defaultTheme="light">
-        <SessionProvider>{children}</SessionProvider>
+        <SessionProvider>
+          <ApplicationRepositoryProvider>
+          {children}
+        </ApplicationRepositoryProvider>
+        </SessionProvider>
         <Toaster />
       </ThemeProvider>
       </QueryClientProvider>

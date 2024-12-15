@@ -19,19 +19,19 @@ export async function GET(
       `https://api.themoviedb.org/3/movie/${id}/credits?api_key=${process.env.TMDB_API_KEY}&language=fr-FR`
     );
 
-    if (!detailsRes.ok || !creditsRes.ok) {
-      throw new Error('Erreur lors de la récupération des données de l\'API');
+    const imagesRes = await fetch(
+      `https://api.themoviedb.org/3/movie/${id}/images?api_key=${process.env.TMDB_API_KEY}`
+    );
+
+    if (!detailsRes.ok || !creditsRes.ok || !imagesRes.ok) {
+      throw new Error("Erreur lors de la récupération des données de l'API");
     }
 
     const details = await detailsRes.json();
     const credits = await creditsRes.json();
+    const images = await imagesRes.json();
 
-    const responseData = {
-      ...details,
-      credits,
-    };
-
-    return NextResponse.json(responseData, { status: 200 });
+    return NextResponse.json({ ...details, credits, images }, { status: 200 });
   } catch (error) {
     console.error('Erreur API :', error);
     return NextResponse.json({ error: 'Erreur interne' }, { status: 500 });

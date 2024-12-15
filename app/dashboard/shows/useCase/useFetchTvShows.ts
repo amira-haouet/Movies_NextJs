@@ -1,20 +1,21 @@
 'use client'
 
 import { TVShow } from "@/app/entities/TVShow";
+import { useApplicationRepositoryContext } from "@/repositories/ApplicationRepositoryContext";
 import { TVShowRepositoryInternal } from "@/repositories/TVShowRepositoryInternal";
 import { useQuery } from "@tanstack/react-query";
 
 export const useFetchTvShows = (category: "on-the-air" | "popular" | "top-rated") => {
-    const repository = new TVShowRepositoryInternal();
+    const { tvShowsRepository } = useApplicationRepositoryContext();
 
     const fetchTVShow = async (): Promise<TVShow[]> => {
         switch (category) {
             case "on-the-air":
-                return await repository.getOnTheAirTVShow();
+                return await tvShowsRepository.getOnTheAirTVShow();
             case "popular":
-                return await repository.getPopularTVShow();
+                return await tvShowsRepository.getPopularTVShow();
             case "top-rated":
-                return await repository.getTopRatedTVShow();
+                return await tvShowsRepository.getTopRatedTVShow();
             default:
                 throw new Error("Invalid category");
         }

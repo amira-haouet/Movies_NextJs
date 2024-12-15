@@ -33,7 +33,7 @@ export function AppNavbar() {
                 <input
                     type="text"
                     placeholder="Rechercher..."
-                    className="w-32 rounded-lg border border-gray-300 px-4 py-2 text-gray-700 focus:outline-none focus:ring-2 focus:ring-black md:w-72 mr-2"
+                    className="w-32 rounded-lg border border-gray-300 dark:bg-[#31363F] px-4 py-2 text-gray-700  dark:text-white focus:outline-none focus:ring-2 focus:ring-black md:w-72 mr-2"
                 />
             </div>
 

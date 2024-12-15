@@ -26,4 +26,11 @@ export class MoviesRepositoryInternal implements MoviesRepository {
   async getTopRatedMovies(): Promise<Movie[]> {
     return this.fetchFromApi(`/api/movies/top-rated`);
   }
+  async getMovieDetails(id: string): Promise<Movie> {
+    const response = await fetch(`/api/movies/${id}`);
+    if (!response.ok) {
+      throw new Error(`Erreur lors de la récupération du film avec l'ID ${id}`);
+    }
+    return await response.json();
+  }
 }

@@ -22,7 +22,7 @@ import { Grid } from "lucide-react"
           <SidebarMenu>
             <SidebarMenuItem>
               <SidebarMenuButton asChild>
-                <a href="#">
+                <a href="/dashboard/discover">
                   <Grid /> 
                   <span>Discover</span>
                 </a>

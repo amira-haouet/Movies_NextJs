@@ -37,5 +37,13 @@ export interface TVShow {
       episode_count: number;
       vote_average: number;
     }[];
+    credits?: {
+      cast: { id: number; name: string; character: string; profile_path: string | null }[];
+      crew: { id: number; name: string; job: string; profile_path: string | null }[];
+    };
+    images?: {
+      backdrops: { file_path: string }[];
+      posters: { file_path: string }[];
+    };
   }
   

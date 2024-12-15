@@ -11,16 +11,27 @@ export async function GET(
   }
 
   try {
-    const response = await fetch(
+    const detailsRes = await fetch(
       `https://api.themoviedb.org/3/tv/${id}?api_key=${process.env.TMDB_API_KEY}&language=fr-FR`
     );
 
-    if (!response.ok) {
-      throw new Error('Erreur lors de la récupération des détails de l\'émission');
+    const creditsRes = await fetch(
+      `https://api.themoviedb.org/3/tv/${id}/credits?api_key=${process.env.TMDB_API_KEY}&language=fr-FR`
+    );
+
+    const imagesRes = await fetch(
+      `https://api.themoviedb.org/3/tv/${id}/images?api_key=${process.env.TMDB_API_KEY}`
+    );
+
+    if (!detailsRes.ok || !creditsRes.ok || !imagesRes.ok) {
+      throw new Error("Erreur lors de la récupération des données de l'API");
     }
 
-    const data = await response.json();
-    return NextResponse.json(data, { status: 200 });
+    const details = await detailsRes.json();
+    const credits = await creditsRes.json();
+    const images = await imagesRes.json();
+
+    return NextResponse.json({ ...details, credits, images }, { status: 200 });
   } catch (error) {
     console.error('Erreur API :', error);
     return NextResponse.json({ error: 'Erreur interne' }, { status: 500 });
