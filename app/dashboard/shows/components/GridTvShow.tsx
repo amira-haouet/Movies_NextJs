@@ -3,6 +3,8 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { TVShow } from "@/app/entities/TVShow";
+import { useEffect, useState } from 'react';
+import { searchTerm$ } from '@/app/store/searchObservable';
 
 interface GridTVShowProps {
   title?: string;
@@ -12,6 +14,13 @@ interface GridTVShowProps {
 }
 
 export default function GridTVShow({ title, isLoading, shows, isHorizontal }: GridTVShowProps) {
+  const [searchTerm, setSearchTerm] = useState<string>("");
+
+  useEffect(() => {
+    const subscription = searchTerm$.subscribe((term) => setSearchTerm(term));
+    return () => subscription.unsubscribe(); 
+  }, []);
+  
   if (isLoading) {
     return <p className="text-center text-gray-500 dark:text-gray-400">Chargement des données...</p>;
   }
@@ -30,6 +39,11 @@ export default function GridTVShow({ title, isLoading, shows, isHorizontal }: Gr
       ));
   };
 
+  // Filtrage dynamique des films
+  const filteredTVShow = shows.filter((show) =>
+    show.name.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
   return (
     <div className="p-4">
       {title && (
@@ -42,7 +56,7 @@ export default function GridTVShow({ title, isLoading, shows, isHorizontal }: Gr
             : "grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6"
         }`}
       >
-        {shows.map((show) => (
+        {filteredTVShow.map((show) => (
           <Link href={`/dashboard/shows/${show.id}`} key={show.id}>
             <div
               data-testid="show-card"

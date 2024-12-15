@@ -3,6 +3,8 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { Movie } from "@/app/entities/Movie";
+import { useEffect, useState } from "react";
+import { searchTerm$ } from '@/app/store/searchObservable';
 
 interface GridMovieProps {
   title?: string;
@@ -12,6 +14,13 @@ interface GridMovieProps {
 }
 
 export default function GridMovie({ title, isLoading, movies, isHorizontal }: GridMovieProps) {
+  const [searchTerm, setSearchTerm] = useState<string>("");
+
+  useEffect(() => {
+    const subscription = searchTerm$.subscribe((term) => setSearchTerm(term));
+    return () => subscription.unsubscribe();
+  }, []);
+
   if (isLoading) {
     return <p className="text-center text-gray-500 dark:text-gray-400">Chargement des données...</p>;
   }
@@ -29,7 +38,12 @@ export default function GridMovie({ title, isLoading, movies, isHorizontal }: Gr
         </span>
       ));
   };
-
+  
+  // Filtrage dynamique des films
+  const filteredMovies = movies.filter((movie) =>
+    movie.title.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+  
   return (
     <div className="p-4">
       {title && (
@@ -42,7 +56,7 @@ export default function GridMovie({ title, isLoading, movies, isHorizontal }: Gr
             : "grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6"
         }`}
       >
-        {movies.map((movie) => (
+        {filteredMovies.map((movie) => (
           <Link href={`/dashboard/movies/${movie.id}`} key={movie.id}>
             <div
               data-testid="movie-card"
