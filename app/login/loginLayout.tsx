@@ -74,7 +74,7 @@ export const LoginLayout: React.FC = () => {
                 />
 
                 <Form {...form}>
-                    <form onSubmit={form.handleSubmit(handleSubmit)}  className="flex flex-col gap-6 w-full max-w-sm">
+                    <form onSubmit={form.handleSubmit(handleSubmit)}  className="flex flex-col gap-6 w-full text-black max-w-sm">
                         <FormField
                             control={form.control}
                             name="email"
